@@ -30,20 +30,14 @@ app = Flask(__name__)
 def main():
     return redirect("/VTOP/")
 
-@app.route("/VTOP/",methods=["POST","GET"])
+@app.route("/VTOP",methods=["POST","GET"])
 def reddit():
     if request.method == "POST":
         sr = str(request.form["b64_url"])
-        if "/" in sr: sr = sr.replace("/","_")
-        return redirect("/VTOP/"+sr)
+        result = get_captcha(sr)
+        return render_template("captcha.html",inp=sr,result = result)
     else:
         return render_template("captcha.html")
-
-@app.route("/VTOP/<string:b64_url>")
-def reddit_sr(b64_url):
-    if "_" in b64_url: b64_url = b64_url.replace("_","/")
-    result = get_captcha(b64_url)
-    return render_template("captcha.html",inp=b64_url,result = result)
 
 if __name__ == "__main__":
     app.run()
