@@ -30,7 +30,7 @@ app = Flask(__name__)
 def main():
     return redirect("/VTOP/")
 
-@app.route("/VTOP",methods=["POST","GET"])
+@app.route("/VTOP/",methods=["POST","GET"])
 def reddit():
     if request.method == "POST":
         sr = str(request.form["b64_url"])
