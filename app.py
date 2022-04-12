@@ -45,4 +45,5 @@ def reddit_sr(b64_url):
     result = get_captcha(b64_url)
     return render_template("captcha.html",inp=b64_url,result = result)
 
-app.run()
+if __name__ == "__main__":
+    app.run()
